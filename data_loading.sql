@@ -1,13 +1,13 @@
 USE olist;
 
--- 1. Load Users (Usually no nulls here, but safe to run)
-LOAD DATA INFILE '/Users/sanskarsrivastava/Desktop/archive (4)/olist_customers_dataset.csv'
+-- 1. Load Users 
+LOAD DATA INFILE 'path_to_/olist_customers_dataset.csv'
 INTO TABLE users
 FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
--- 2. Load Products (Fixes Error 1366)
-LOAD DATA INFILE '/Users/sanskarsrivastava/Desktop/archive (4)/olist_products_dataset.csv'
+-- 2. Load Products 
+LOAD DATA INFILE 'path_to_/olist_products_dataset.csv'
 INTO TABLE products
 FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
@@ -21,8 +21,8 @@ product_length_cm = NULLIF(@v_length, ''),
 product_height_cm = NULLIF(@v_height, ''),
 product_width_cm = NULLIF(@v_width, '');
 
--- 3. Load Orders (Handles missing dates)
-LOAD DATA INFILE '/Users/sanskarsrivastava/Desktop/archive (4)/olist_orders_dataset.csv'
+-- 3. Load Orders 
+LOAD DATA INFILE 'path_to_/olist_orders_dataset.csv'
 INTO TABLE orders
 FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
@@ -34,7 +34,7 @@ order_delivered_customer_date = NULLIF(@v_customer, ''),
 order_estimated_delivery_date = NULLIF(@v_estimated, '');
 
 -- 4. Load Order Items
-LOAD DATA INFILE '/Users/sanskarsrivastava/Desktop/archive (4)/olist_order_items_dataset.csv'
+LOAD DATA INFILE 'path_to_/olist_order_items_dataset.csv'
 INTO TABLE order_items
 FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
