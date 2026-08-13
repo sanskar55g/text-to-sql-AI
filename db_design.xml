@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0">
+  <diagram id="olist-erd" name="Olist Database Schema">
+    <mxGraphModel dx="1415" dy="821" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="users" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="&lt;div style=&quot;text-align:center;font-size:16px;&quot;&gt;&lt;b&gt;USERS&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;&lt;b&gt;PK&lt;/b&gt; customer_id : VARCHAR(50)&lt;br&gt;customer_unique_id : VARCHAR(50)&lt;br&gt;customer_zip_code_prefix : INT&lt;br&gt;customer_city : VARCHAR(100)&lt;br&gt;customer_state : VARCHAR(20)" vertex="1">
+          <mxGeometry height="210" width="330" x="80" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="orders" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" value="&lt;div style=&quot;text-align:center;font-size:16px;&quot;&gt;&lt;b&gt;ORDERS&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;&lt;b&gt;PK&lt;/b&gt; order_id : VARCHAR(50)&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; customer_id : VARCHAR(50)&lt;br&gt;order_status : VARCHAR(50)&lt;br&gt;order_purchase_timestamp : DATETIME&lt;br&gt;order_approved_at : DATETIME&lt;br&gt;order_delivered_carrier_date : DATETIME&lt;br&gt;order_delivered_customer_date : DATETIME&lt;br&gt;order_estimated_delivery_date : DATETIME" vertex="1">
+          <mxGeometry height="300" width="390" x="535" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="products" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" value="&lt;div style=&quot;text-align:center;font-size:16px;&quot;&gt;&lt;b&gt;PRODUCTS&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;&lt;b&gt;PK&lt;/b&gt; product_id : VARCHAR(50)&lt;br&gt;product_category_name : VARCHAR(100)&lt;br&gt;product_name_lenght : INT&lt;br&gt;product_description_lenght : INT&lt;br&gt;product_photos_qty : INT&lt;br&gt;product_weight_g : INT&lt;br&gt;product_length_cm : INT&lt;br&gt;product_height_cm : INT&lt;br&gt;product_width_cm : INT" vertex="1">
+          <mxGeometry height="320" width="350" x="80" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="order_items" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="&lt;div style=&quot;text-align:center;font-size:16px;&quot;&gt;&lt;b&gt;ORDER_ITEMS&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;&lt;b&gt;PK, FK&lt;/b&gt; order_id : VARCHAR(50)&lt;br&gt;&lt;b&gt;PK&lt;/b&gt; order_item_id : INT&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; product_id : VARCHAR(50)&lt;br&gt;seller_id : VARCHAR(50)&lt;br&gt;shipping_limit_date : DATETIME&lt;br&gt;price : DECIMAL(10,2)&lt;br&gt;freight_value : DECIMAL(10,2)&lt;br&gt;&lt;br&gt;&lt;b&gt;Composite PK:&lt;/b&gt;&lt;br&gt;(order_id, order_item_id)" vertex="1">
+          <mxGeometry height="300" width="355" x="570" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="users_orders" edge="1" parent="1" source="users" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeWidth=2;strokeColor=#6c8ebf;fontStyle=1;" target="orders" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="orders_order_items" edge="1" parent="1" source="orders" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeWidth=2;strokeColor=#82b366;fontStyle=1;" target="order_items" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="products_order_items" edge="1" parent="1" source="products" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;strokeWidth=2;strokeColor=#d6b656;fontStyle=1;" target="order_items" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_users_orders" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontStyle=2;" value="users.customer_id → orders.customer_id" vertex="1">
+          <mxGeometry height="40" width="160" x="400" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="label_orders_items" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontStyle=2;" value="orders.order_id → order_items.order_id" vertex="1">
+          <mxGeometry height="40" width="190" x="740" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="label_products_items" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontStyle=2;" value="products.product_id → order_items.product_id" vertex="1">
+          <mxGeometry height="40" width="180" x="410" y="675" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
