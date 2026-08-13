@@ -50,16 +50,3 @@ CREATE TABLE order_items (
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
-
--- Disable foreign key checks so we don't get errors while dropping
--- SET FOREIGN_KEY_CHECKS = 0;
-
--- DROP TABLE IF EXISTS order_items;
--- DROP TABLE IF EXISTS orders;
--- DROP TABLE IF EXISTS products;
--- DROP TABLE IF EXISTS users;
-
--- Re-enable foreign key checks
--- SET FOREIGN_KEY_CHECKS = 1;
-
--- SELECT "Tables dropped successfully" AS Status;
