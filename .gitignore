@@ -1,0 +1,13 @@
+# Secrets
+.env
+
+# Python
+venv/
+__pycache__/
+
+# Datasets 
+datasets/
+*.csv
+
+# System
+.DS_Store
