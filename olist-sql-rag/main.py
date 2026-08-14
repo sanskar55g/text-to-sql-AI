@@ -31,13 +31,31 @@ def main():
 
         # 4. Generate SQL from AI
         ai_response = generate_sql(user_input)
+        response_type = ai_response.get("type")
 
-        if "error" in ai_response:
-            print(f"AI Error: {ai_response['error']}")
+        # 4a. Handle errors
+        if response_type == "error" or "error" in ai_response:
+            print(f"AI Error: {ai_response.get('error', 'Unknown error')}")
+            continue
+
+        # 4b. Handle clarification requests
+        if response_type == "clarification":
+            print(f"\nI need a bit more detail: {ai_response['question']}")
+            options = ai_response.get("options", [])
+            if options:
+                print("Possible interpretations:")
+                for i, opt in enumerate(options, start=1):
+                    print(f"   {i}. {opt}")
+            print("Please rephrase your question with more specifics.")
+            continue
+
+        # 4c. Handle unexpected shapes defensively
+        if response_type != "sql" or "sql" not in ai_response:
+            print(f"Unexpected AI response format: {ai_response}")
             continue
 
         sql = ai_response["sql"]
-        explanation = ai_response["explanation"]
+        explanation = ai_response.get("explanation", "")
 
         print(f"Reasoning: {explanation}")
         print(f"Running SQL: {sql}")
